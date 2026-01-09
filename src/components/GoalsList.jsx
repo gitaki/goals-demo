@@ -67,7 +67,7 @@ export default function GoalsList() {
             <div className="space-y-3 pb-24">
                 {sortedGoals.length === 0 ? (
                     <div className="text-center py-10 text-system-gray2">
-                        <p>No goals for this day.</p>
+                        <p>{t('app.no_goals')}</p>
                     </div>
                 ) : (
                     sortedGoals.map(goal => (

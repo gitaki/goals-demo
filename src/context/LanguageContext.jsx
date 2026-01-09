@@ -6,6 +6,7 @@ const LanguageContext = createContext();
 const translations = {
     es: {
         'app.title': 'Mis Metas',
+        'app.no_goals': 'No metas para este día.',
         'nav.today': 'Hoy',
         'goal.daily': 'Diaria',
         'goal.weekly': 'Semanal',
@@ -25,6 +26,7 @@ const translations = {
     },
     en: {
         'app.title': 'My Targets',
+        'app.no_goals': 'No goals for this day.',
         'nav.today': 'Today',
         'goal.daily': 'Daily',
         'goal.weekly': 'Weekly',
