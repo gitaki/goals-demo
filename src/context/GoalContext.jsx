@@ -11,6 +11,28 @@ export function GoalProvider({ children }) {
     const [goals, setGoals] = useState([]);
     const [records, setRecords] = useState({});
     const [loading, setLoading] = useState(true);
+    const [points, setPoints] = useState(0);
+
+    // Calculate points whenever records or goals change
+    useEffect(() => {
+        let total = 0;
+        const validStatuses = ['completed']; // Only count completed
+
+        // Iterate over records
+        for (const [key, status] of Object.entries(records)) {
+            if (validStatuses.includes(status)) {
+                // key is "goalId_date"
+                const goalId = key.split('_')[0];
+                const goal = goals.find(g => g.id === goalId);
+
+                if (goal) {
+                    if (goal.type === 'daily') total += 10;
+                    if (goal.type === 'weekly') total += 50;
+                }
+            }
+        }
+        setPoints(total);
+    }, [records, goals]);
 
     // Fetch initial data
     useEffect(() => {
@@ -157,7 +179,9 @@ export function GoalProvider({ children }) {
             deleteGoal,
             toggleGoalStatus,
             getGoalStatus,
-            loading
+            getGoalStatus,
+            loading,
+            points
         }}>
             {children}
         </GoalContext.Provider>

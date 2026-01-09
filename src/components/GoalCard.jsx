@@ -43,6 +43,9 @@ export default function GoalCard({ goal, status, onStatusChange }) {
                     )}>
                         {goal.type}
                     </span>
+                    <span className="text-system-yellow font-medium">
+                        +{goal.type === 'daily' ? '10' : '50'} pts
+                    </span>
                     {goal.recurrenceDays && goal.recurrenceDays.length > 0 && (
                         <span>• {goal.recurrenceDays.length} days/wk</span>
                     )}
