@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGoals } from '../context/GoalContext';
+import { useLanguage } from '../context/LanguageContext';
 import { isGoalDueOnDate } from '../utils/recurrenceUtils';
 import GoalCard from './GoalCard';
 import AddGoalForm from './AddGoalForm';
@@ -8,6 +9,7 @@ import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 
 export default function GoalsList() {
     const { goals, getGoalStatus, toggleGoalStatus } = useGoals();
+    const { t, dateLocale } = useLanguage();
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -42,16 +44,16 @@ export default function GoalsList() {
                             onClick={() => setCurrentDate(new Date())}
                             className="text-xs font-semibold text-system-blue bg-system-blue/10 px-2 py-1 rounded"
                         >
-                            Today
+                            {t('nav.today')}
                         </button>
                     )}
                 </div>
                 <div className="text-center flex-1">
-                    <h2 className="text-lg font-bold">
-                        {isToday ? 'Today' : format(currentDate, 'EEEE')}
+                    <h2 className="text-lg font-bold capitalize">
+                        {isToday ? t('nav.today') : format(currentDate, 'EEEE', { locale: dateLocale })}
                     </h2>
-                    <div className="text-sm text-system-gray">
-                        {format(currentDate, 'MMM d, yyyy')}
+                    <div className="text-sm text-system-gray capitalize">
+                        {format(currentDate, 'MMM d, yyyy', { locale: dateLocale })}
                     </div>
                 </div>
                 <button onClick={() => handleDateChange(1)} className="p-2 bg-system-bg-secondary rounded-full">

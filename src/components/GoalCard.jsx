@@ -3,8 +3,11 @@ import { Check, X, RotateCcw } from 'lucide-react';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 
+import { useLanguage } from '../context/LanguageContext';
+
 export default function GoalCard({ goal, status, onStatusChange }) {
     // status: 'completed' | 'failed' | 'open'
+    const { t } = useLanguage();
 
     const getStatusColor = () => {
         switch (status) {
@@ -41,13 +44,13 @@ export default function GoalCard({ goal, status, onStatusChange }) {
                         "uppercase tracking-wider font-bold",
                         goal.type === 'daily' ? "text-system-blue" : "text-system-purple"
                     )}>
-                        {goal.type}
+                        {goal.type === 'daily' ? t('goal.daily') : t('goal.weekly')}
                     </span>
                     <span className="text-system-yellow font-medium">
-                        +{goal.type === 'daily' ? '10' : '50'} pts
+                        +{goal.type === 'daily' ? '10' : '50'} {t('pts')}
                     </span>
                     {goal.recurrenceDays && goal.recurrenceDays.length > 0 && (
-                        <span>• {goal.recurrenceDays.length} days/wk</span>
+                        <span>• {goal.recurrenceDays.length} {t('goal.days.week')}</span>
                     )}
                 </p>
             </div>
